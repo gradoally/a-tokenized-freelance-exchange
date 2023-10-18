@@ -18,6 +18,7 @@ int min_tons_for_storage() asm "50000000 PUSHINT"; ;; 0.05 TON
 ;;  cell Content
 ;;  MsgAddressInt editor_address
 
+;; expanded storage structure
 struct OrderData {
     uint64 orderId;
     MsgAddressInt customer;
@@ -289,4 +290,33 @@ slice get_editor_address() method_id {
 (int, int, slice, slice, cell) get_nft_data() method_id {
     (int init?, int index, slice collection_address, slice owner_address, cell content, _) = load_data();
     return (init?, index, collection_address, owner_address, content);
+}
+
+;; an example function which creates a new NFT order
+() create_nft_order(string category, string title, string deadline, uint256 budget, string description, bytes technicalFile) impure inline {
+    var (init, index, collection_address, _, _, _) = load_data();
+    require(init == 0, "NFT order already initialized");
+
+    ;; Initialize NFT data
+    store_data(index, collection_address, msg.sender, null(), null());
+
+    ;; Add order details to the new OrderData storage
+    OrderData storage newOrder = orders[index];
+    newOrder.orderId = index;
+    newOrder.customer = msg.sender;
+    newOrder.category = category;
+    newOrder.title = title;
+    newOrder.deadline = deadline;
+    newOrder.budget = budget;
+    newOrder.description = description;
+    newOrder.technicalFile = technicalFile;
+    newOrder.status = "Under moderation";
+    newOrder.admin = msg.sender; ;; You might want to set this to the actual admin address
+
+    ;; Increment the index for the next order
+    index++;
+
+    ;; Additional logic can be added as needed
+
+    ;; Emit an event or perform any other necessary actions
 }
