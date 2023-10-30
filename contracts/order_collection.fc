@@ -42,10 +42,6 @@
         }
         return ();
     }
-    if (op == op::edit_collection_content) { ;; change content
-        store_data();
-        return ();
-    }
 
     throw(0xffff);
 }
