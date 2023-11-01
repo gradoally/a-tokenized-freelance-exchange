@@ -13,7 +13,7 @@ global cell storage::arbitration_bids;
     storage::content = ds~load_ref();
     storage::item_code = ds~load_ref();
     storage::royalty_params = ds~load_ref();
-    storage::arbitration_bids = ds~load_dict(); 
+   ;; storage::arbitration_bids = ds~load_dict(); 
 }
 
 () store_data() impure inline {
@@ -24,7 +24,7 @@ global cell storage::arbitration_bids;
             .store_ref(storage::content)
             .store_ref(storage::item_code)
             .store_ref(storage::royalty_params)
-            .store_dict(storage::arbitration_bids)
+        ;;    .store_dict(storage::arbitration_bids)
         .end_cell()
     );
 }

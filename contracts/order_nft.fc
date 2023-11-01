@@ -1,5 +1,4 @@
 #pragma version >=0.2.0;
-
 #include "imports/stdlib.fc";
 #include "imports/params.fc";
 #include "imports/op-codes.fc";
@@ -134,7 +133,7 @@ int min_tons_for_storage() asm "50000000 PUSHINT"; ;; 0.05 TON
         return ();
     }
 
-    if (op == op::is_customer?) {
+{-    if (op == op::is_customer?) {
 
         (cell value, int f) = data.udict_get_ref?(256, "customer_addr"H);
         throw_unless(135, f);
@@ -177,7 +176,7 @@ int min_tons_for_storage() asm "50000000 PUSHINT"; ;; 0.05 TON
         messages::send_simple(0, sender_address, msg, 64);
 
     }
-
+-}
     if (op == op::transfer_editorship) {
         transfer_editorship(my_balance, storage::editor_address, sender_address, query_id, in_msg_body, fwd_fee);
         return ();

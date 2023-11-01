@@ -27,18 +27,17 @@
 
     if (ps_op == op::choose_freelancer) {
 
+        return ();
     }
 
     if (ps_op == op::claim_payment) {
 
+        return ();
     }
 
     if (ps_op == op::complete_order) {
-
-    }
-
-    if (ps_op == op::complete_order) {
-
+        
+        return ();
     }
 
     throw(0xffff);

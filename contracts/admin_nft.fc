@@ -1,5 +1,4 @@
 #pragma version >=0.2.0;
-
 #include "imports/stdlib.fc";
 #include "imports/params.fc";
 #include "imports/op-codes.fc";
