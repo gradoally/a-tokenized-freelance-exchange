@@ -3,3 +3,12 @@
 const int SUCCESS = 201;
 const int MIN_DEPLOY_AMOUNT = 20000000; ;; 0.02 TON
 const int REQUIRED_TON_RESERVE = 1000000000; ;; 1 TON
+
+;; Order steps
+
+const int status::moderation = 0;
+const int status::active = 1;
+const int status::in_progress = 2;
+const int status::at_arbitration = 3;
+const int status::awaiting_payment = 4;
+const int status::completed = ;

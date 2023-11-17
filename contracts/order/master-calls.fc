@@ -48,6 +48,7 @@
     ;; Fourth order step: customer assigns a user to execute the order and in the same transaction sends the order amount to the contract (order status becomes "In Progress")
     if (op == op::assign_user_to_task) {
 
+        throw_unless(33, is_customer?());
         throw_unless(30, equal_slices(status, "Active"));
 
         slice designated_freelancer = in_msg_body~load_msg_addr();
@@ -64,6 +65,7 @@
     ;; Fifth order step: user sends transaction about successful fulfillment of task
     if (op == op::task_completed) {
 
+        throw_unless(33, is_freelancer?());
         throw_unless(30, equal_slices(status, "In progress"));
 
         data~udict_set_ref(256, "status"H, begin_cell().store_uint(0, 8).store_slice("Fulfilled").end_cell());
@@ -77,6 +79,7 @@
     ;; Sixth order step: the customer either confirms the fulfillment of the order and sends a transaction to the smart contract, as a result of which the money is transferred to the executor, or sends the order to arbitration
     if (op == op::customer_feedback) {
 
+        throw_unless(33, is_customer?());
         throw_unless(30, equal_slices(status, "Fulfilled"));
 
         if (in_msg_body~load_uint(1)) {

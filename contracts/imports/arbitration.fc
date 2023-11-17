@@ -1,0 +1,35 @@
+int is_customer?(slice sender_address) inline {
+
+        (cell value, int f) = data.udict_get_ref?(256, "customer_addr"H);
+        throw_unless(135, f);
+
+        int onchain_bits = value.load_uint(8);
+        slice customer_addr = value.load_msg_addr();
+
+        int is_customer?;
+
+        if (sender_address == customer_addr) {
+            return -1;
+        } else {
+            return 0;
+        }
+
+}
+
+int is_customer?(slice sender_address) inline {
+
+        (cell value, int f) = data.udict_get_ref?(256, "freelancer_addr"H);
+        throw_unless(135, f);
+
+        int onchain_bits = value.load_uint(8);
+        slice freelancer_addr = value.load_msg_addr();
+
+        int is_freelancer?;
+
+        if (sender_address == customer_addr) {
+            is_freelancer? = -1
+        } else {
+            is_freelancer? = 0
+        }
+
+}
